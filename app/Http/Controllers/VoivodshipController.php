@@ -19,6 +19,10 @@ class VoivodshipController extends Controller
         $cities = City::whereHas('voivodship', function ($query) use ($name) {
             $query->where('name', '=', $name);
         })->get();
+
+        if (empty($cities[0])) {
+            abort(404, 'The comments does not exist.');
+        }
         return view('voivodship', compact('cities'));
     }
 

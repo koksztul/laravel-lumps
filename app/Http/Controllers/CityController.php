@@ -18,6 +18,10 @@ class CityController extends Controller
         $shops = Shop::whereHas('city', function ($query) use ($city) {
             $query->where('name', '=', $city);
         })->get();
+
+        if (empty($shops[0])) {
+            abort(404, 'The comments does not exist.');
+        }
         return view('city', compact('shops'));
     }
 
