@@ -20,6 +20,9 @@ class CreateShopsTable extends Migration
             $table->string('name');
             $table->integer('ratio');
             $table->string('address');
+            $table->string('website');
+            $table->text('information');
+            $table->string('contact');
             $table->string('open_hrs_mo');
             $table->string('open_hrs_tu');
             $table->string('open_hrs_we');

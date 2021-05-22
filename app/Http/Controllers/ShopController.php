@@ -46,7 +46,7 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function show(Shop $shop)
+    public function show($voivodship, $city, Shop $shop)
     {
         return view('shop', compact('shop'));
     }

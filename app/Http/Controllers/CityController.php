@@ -13,10 +13,10 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($name)
+    public function index($voivodship, $city)
     {
-        $shops = Shop::whereHas('city', function ($query) use ($name) {
-            $query->where('name', '=', $name);
+        $shops = Shop::whereHas('city', function ($query) use ($city) {
+            $query->where('name', '=', $city);
         })->get();
         return view('city', compact('shops'));
     }

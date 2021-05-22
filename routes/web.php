@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,18 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('list');
-});
 
 Auth::routes();
 
-Route::get('/list', 'App\Http\Controllers\ShopController@index')->name('list');
-
+Route::get('/', 'App\Http\Controllers\ShopController@index')->name('shop.index');
 
 Route::get('{name}', 'App\Http\Controllers\VoivodshipController@index')->name('voivodship.index');
-Route::get('city/{name}', 'App\Http\Controllers\CityController@index')->name('city.index');
+Route::get('/{voivodeship}/{city}', 'App\Http\Controllers\CityController@index')->name('city.index');
 
-Route::get('shop/{shop}', 'App\Http\Controllers\ShopController@show')->name('shop.show');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/{voivodeship}/{city}/shop-id/{shop}', 'App\Http\Controllers\ShopController@show')->name('shop.show');
