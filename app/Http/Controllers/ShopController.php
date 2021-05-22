@@ -48,7 +48,11 @@ class ShopController extends Controller
      */
     public function show($voivodship, $city, Shop $shop)
     {
-        return view('shop', compact('shop'));
+        if ($city == $shop->city->name && $voivodship == $shop->city->voivodship->name) {
+            return view('shop', compact('shop'));
+        } else {
+            abort(404, 'The comments does not exist.');
+        }
     }
 
     /**
