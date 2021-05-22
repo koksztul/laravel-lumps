@@ -10,9 +10,9 @@ class City extends Model
     use HasFactory;
     public function voivodship()
     {
-        return $this->belongsTo(Voivodships::class);
+        return $this->belongsTo(Voivodship::class);
     }
-    public function shops() 
+    public function shops()
     {
         return $this->hasMany(Shop::class);
     }

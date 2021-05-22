@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -12,9 +13,12 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($name)
     {
-        //
+        $shops = Shop::whereHas('city', function ($query) use ($name) {
+            $query->where('name', '=', $name);
+        })->get();
+        return view('city', compact('shops'));
     }
 
     /**

@@ -22,7 +22,7 @@ class VoivodshipFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->randomElement($array = array ('dolnoslaskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'lodzkie', 'malopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'pomorskie', 'slaskie', 'swietokrzyskie', 'warminsko-mazurskie,', 'zachodniopomorskie', 'wielkoplskie', 'podlaskie')),
+            'name' => $this->faker->unique()->randomElement($array = array ('dolnoslaskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'lodzkie', 'malopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'pomorskie', 'slaskie', 'swietokrzyskie', 'warminsko-mazurskie', 'zachodniopomorskie', 'wielkoplskie', 'podlaskie')),
         ];
     }
 }

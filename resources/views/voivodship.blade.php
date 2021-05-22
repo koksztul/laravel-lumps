@@ -4,9 +4,11 @@
         <title>Page Title</title>
     </head>
 <body>
+    <h1>Wojewodztwo: {{ $cities[0]->voivodship->name }}</h1>
+    <h3>Lista miast: </h5>
     <ol>
-        @foreach ($voivodships as $voivodship)
-        <li>{{ $voivodship->name }}</li>
+        @foreach ($cities as $city)
+        <li><a href="{{ route('city.index', $city->name) }}">{{$city->name}}</a></li>
         @endforeach
     </ol>
 </body>

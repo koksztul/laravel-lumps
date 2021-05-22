@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\cr;
 use Illuminate\Http\Request;
 use App\Models\Voivodship;
+use App\Models\City;
 
 class VoivodshipController extends Controller
 {
@@ -15,11 +16,10 @@ class VoivodshipController extends Controller
      */
     public function index($name)
     {
-        $cities = Voivodship::whereHas('cities', function ($query) {
-            $query->whereName('lubuskie');
+        $cities = City::whereHas('voivodship', function ($query) use ($name) {
+            $query->where('name', '=', $name);
         })->get();
-        dd($cities);
-        return view('voivodship', compact('voivodships'));
+        return view('voivodship', compact('cities'));
     }
 
     /**
