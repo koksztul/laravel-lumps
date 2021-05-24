@@ -23,7 +23,7 @@ class CityController extends Controller
             abort(404, 'The comments does not exist.');
         }
         if ($shops[0]->city->voivodship->name == $voivodship) {
-            return view('city', compact('shops'));
+            return view('pages.city', compact('shops'));
         } else {
             abort(404, 'The comments does not exist.');
         }

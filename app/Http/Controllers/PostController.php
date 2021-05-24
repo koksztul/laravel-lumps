@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shop;
+use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Models\Voivodship;
 
-class ShopController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $voivodships = Voivodship::get();
-        return view('pages.list', compact('voivodships'));
+        //
     }
 
     /**
@@ -43,25 +41,21 @@ class ShopController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Shop  $shop
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show($voivodship, $city, Shop $shop)
+    public function show(Post $post)
     {
-        if ($city == $shop->city->name && $voivodship == $shop->city->voivodship->name) {
-            return view('pages.shop', compact('shop'));
-        } else {
-            abort(404, 'The comments does not exist.');
-        }
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Shop  $shop
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shop $shop)
+    public function edit(Post $post)
     {
         //
     }
@@ -70,10 +64,10 @@ class ShopController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Shop  $shop
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -81,10 +75,10 @@ class ShopController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Shop  $shop
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shop $shop)
+    public function destroy(Post $post)
     {
         //
     }
