@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $guarded = [];
+
     use HasFactory;
 
-    public function image()
-    {
-        return $this->morphMany(Image::class, 'imageable');
-    }
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

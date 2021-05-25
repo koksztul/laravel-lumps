@@ -9,6 +9,11 @@ class Shop extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'cash' => 'boolean',
+        'card' => 'boolean',
+    ];
+
     use HasFactory;
 
     public function user()
@@ -19,7 +24,7 @@ class Shop extends Model
     {
         return $this->belongsTo(City::class);
     }
-    public function image()
+    public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
     }

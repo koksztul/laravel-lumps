@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             VoivodshipsTableSeeder::class,
             CitiesTableSeeder::class,
             ShopsTableSeeder::class,
+            PostsTableSeeder::class,
+            ImagesTableSeeder::class,
         ]);
     }
 }

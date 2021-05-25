@@ -18,7 +18,7 @@ class CreateShopsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('city_id');
             $table->string('name');
-            $table->integer('ratio');
+            $table->integer('ratio')->default(0);
             $table->string('address');
             $table->string('website');
             $table->text('information');
@@ -44,7 +44,6 @@ class CreateShopsTable extends Migration
                 ->references('id')
                 ->on('cities')
                 ->onDelete('cascade');
-            
         });
     }
 

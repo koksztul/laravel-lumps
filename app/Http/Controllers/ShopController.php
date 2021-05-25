@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreShopRequest;
 use App\Models\Shop;
+use App\Models\City;
 use Illuminate\Http\Request;
 use App\Models\Voivodship;
+use App\Models\Image;
 
 class ShopController extends Controller
 {
@@ -26,7 +29,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.add-shop');
     }
 
     /**
@@ -35,9 +38,25 @@ class ShopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreShopRequest $request)
     {
-        //
+        $voivodship = Voivodship::firstOrCreate(['name' => $request->input('voivodship')]);
+
+        $city = City::firstOrCreate([
+            'name' => $request->input('city'),
+            'voivodship_id' => $voivodship->id
+            ]);
+
+        $data = $request->except(['image', 'city', 'voivodship']);
+        $data['city_id'] = $city->id;
+
+        $shop = Shop::create($data);
+
+        Image::create([
+            'url' => $request->input('image'),
+            'imageable_id' => $shop->id,
+            'imageable_type' => 'App\Models\Shop'
+            ]);
     }
 
     /**

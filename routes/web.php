@@ -18,7 +18,10 @@ Auth::routes();
 
 Route::get('/', 'App\Http\Controllers\ShopController@index')->name('shop.index');
 
-Route::get('{name}', 'App\Http\Controllers\VoivodshipController@index')->name('voivodship.index');
-Route::get('/{voivodeship}/{city}', 'App\Http\Controllers\CityController@index')->name('city.index');
+Route::get('/voivodeship/{name}', 'App\Http\Controllers\VoivodshipController@index')->name('voivodship.index');
+Route::get('/voivodeship/{voivodeship}/city/{city}', 'App\Http\Controllers\CityController@index')->name('city.index');
 
-Route::get('/{voivodeship}/{city}/shop-id/{shop}', 'App\Http\Controllers\ShopController@show')->name('shop.show');
+Route::get('/voivodeship/{voivodship}/city/{city}/shop-id/{shop}', 'App\Http\Controllers\ShopController@show')->name('shop.show');
+
+Route::get('/add-shop', 'App\Http\Controllers\ShopController@create')->name('shop.create');
+Route::post('/add-shop', 'App\Http\Controllers\ShopController@store');

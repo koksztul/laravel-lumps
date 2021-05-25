@@ -25,6 +25,10 @@
                 <li>Niedziela: {{ $shop->open_hrs_sn }}</li>
             </ul>
     </ol>
+    <p>Zdjęcia: </p>
+    @foreach ($shop->images as $image) 
+        <img src="{{ $image->url }}" alt="">
+    @endforeach
     <p>Opis: {{ $shop->information }}</p>
 </body>
 </html>
