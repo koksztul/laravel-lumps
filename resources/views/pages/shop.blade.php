@@ -25,10 +25,15 @@
                 <li>Niedziela: {{ $shop->open_hrs_sn }}</li>
             </ul>
     </ol>
+    {{ dd($shop->photos) }}
+    @if ($shop->photos)
     <p>Zdjęcia: </p>
-    @foreach ($shop->images as $image) 
-        <img src="{{ $image->url }}" alt="">
-    @endforeach
+        @foreach ($shop->photos as $image) 
+            <img src="{{ $image->url }}" alt="">
+        @endforeach
+    @else
+    <p>Brak zdjęć: </p>
+    @endif
     <p>Opis: {{ $shop->information }}</p>
 </body>
 </html>

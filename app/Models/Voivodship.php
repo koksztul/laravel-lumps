@@ -8,13 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Voivodship extends Model
 {
     use HasFactory;
+
     public function cities()
     {
         return $this->hasMany(City::class);
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'name';
     }
 }

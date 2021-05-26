@@ -5,7 +5,7 @@
     </head>
 <body>
     <h1>Dodaj lumpa</h1>
-    <form action="{{ route('shop.create') }}" method="POST">
+    <form action="{{ route('shop.create') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label>Nazwa:</label><br>
         <input type="text" name="name" value="{{ old('name') }}"><br>
@@ -71,7 +71,7 @@
         <label>Niedziela:</label><br>
         <input type="text" name="open_hrs_sn" value="{{ old('open_hrs_sn') }}"><br>
         <label>Zdjęcia:</label><br>
-        <input type="file" name="image" multiple><br>
+        <input type="file" name="image[]" multiple><br>
         <label>Opis:</label><br>
         <textarea name="information" id="" cols="30" rows="10">{{ old('information') }}</textarea><br>
         <input type="submit" value="Submit">

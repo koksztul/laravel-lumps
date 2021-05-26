@@ -19,21 +19,21 @@ class CreateShopsTable extends Migration
             $table->unsignedBigInteger('city_id');
             $table->string('name');
             $table->integer('ratio')->default(0);
-            $table->string('address');
-            $table->string('website');
-            $table->text('information');
-            $table->string('contact');
-            $table->string('open_hrs_mo');
-            $table->string('open_hrs_tu');
-            $table->string('open_hrs_we');
-            $table->string('open_hrs_th');
-            $table->string('open_hrs_fr');
-            $table->string('open_hrs_sa');
-            $table->string('open_hrs_sn');
+            $table->string('address')->nullable();
+            $table->string('website')->nullable();
+            $table->text('information')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('open_hrs_mo')->nullable();
+            $table->string('open_hrs_tu')->nullable();
+            $table->string('open_hrs_we')->nullable();
+            $table->string('open_hrs_th')->nullable();
+            $table->string('open_hrs_fr')->nullable();
+            $table->string('open_hrs_sa')->nullable();
+            $table->string('open_hrs_sn')->nullable();
             $table->enum('type_of_purchase', ['kg', 'valuation', 'both']);
             $table->enum('day_of_delivery', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
-            $table->boolean('cash');
-            $table->boolean('card');
+            $table->boolean('cash')->default(0);
+            $table->boolean('card')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')

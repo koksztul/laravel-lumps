@@ -46,17 +46,21 @@ class ShopController extends Controller
             'name' => $request->input('city'),
             'voivodship_id' => $voivodship->id
             ]);
-
         $data = $request->except(['image', 'city', 'voivodship']);
         $data['city_id'] = $city->id;
 
         $shop = Shop::create($data);
 
-        Image::create([
-            'url' => $request->input('image'),
-            'imageable_id' => $shop->id,
-            'imageable_type' => 'App\Models\Shop'
-            ]);
+        if ($request->hasfile('image')) {
+            foreach ($request->file('image') as $image) {
+                $path = $image->store('photos');
+                Image::create([
+                    'url' => $path,
+                    'imageable_id' => $shop->id,
+                    'imageable_type' => 'App\Models\Shop'
+                    ]);
+            }
+        }
     }
 
     /**
