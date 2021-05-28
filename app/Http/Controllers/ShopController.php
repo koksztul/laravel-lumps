@@ -18,7 +18,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $voivodships = Voivodship::get();
+        $voivodships = Voivodship::has('cities')->get();
         return view('pages.list', compact('voivodships'));
     }
 
@@ -46,13 +46,13 @@ class ShopController extends Controller
             'name' => $request->input('city'),
             'voivodship_id' => $voivodship->id
             ]);
-        $data = $request->except(['image', 'city', 'voivodship']);
+        $data = $request->except(['images', 'city', 'voivodship']);
         $data['city_id'] = $city->id;
 
         $shop = Shop::create($data);
 
-        if ($request->hasfile('image')) {
-            foreach ($request->file('image') as $image) {
+        if ($request->hasfile('images')) {
+            foreach ($request->file('images') as $image) {
                 $path = $image->store('photos');
                 Image::create([
                     'url' => $path,
@@ -61,6 +61,7 @@ class ShopController extends Controller
                     ]);
             }
         }
+        return redirect(route('shop.show', [$voivodship->name, $city->name, $shop->id]));
     }
 
     /**
@@ -84,9 +85,9 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shop $shop)
+    public function edit($voivodship, $city, Shop $shop)
     {
-        //
+        return view('pages.edit-shop', compact('shop'));
     }
 
     /**
@@ -96,9 +97,28 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(Request $request, $voivodship, $city, Shop $shop)
     {
-        //
+        $voivodship = Voivodship::whereName($request->input('voivodship'))->firstOrFail();
+
+        $city = City::whereName($request->input('city'))->firstOrFail();
+
+        $data = Shop::findOrFail($shop->id);
+
+        $data['city_id'] = $city->id;
+        $data->update($request->except(['images', 'city', 'voivodship']));
+
+        if ($request->hasfile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('photos');
+                Image::create([
+                    'url' => $path,
+                    'imageable_id' => $data->id,
+                    'imageable_type' => 'App\Models\Shop'
+                    ]);
+            }
+        }
+        return redirect(route('shop.show', [$voivodship->name, $city->name, $data->id]));
     }
 
     /**

@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Page Title</title>
-    </head>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <h1>Miasto: {{ $shops[0]->city->name }} </h1>
     <h3>Lista sklepów: </h5>
     <ol>
@@ -11,5 +8,4 @@
         <li><a href="{{ route('shop.show', [$shop->city->voivodship->name, $shop->city->name, $shop->id]) }}">{{$shop->name}}</a></li>
         @endforeach
     </ol>
-</body>
-</html>
+@endsection

@@ -23,5 +23,8 @@ Route::get('/voivodeship/{voivodeship}/city/{city}', 'App\Http\Controllers\CityC
 
 Route::get('/voivodeship/{voivodship}/city/{city}/shop-id/{shop}', 'App\Http\Controllers\ShopController@show')->name('shop.show');
 
-Route::get('/add-shop', 'App\Http\Controllers\ShopController@create')->name('shop.create');
-Route::post('/add-shop', 'App\Http\Controllers\ShopController@store');
+Route::get('/add-shop', 'App\Http\Controllers\ShopController@create')->middleware('auth')->name('shop.create');
+Route::post('/add-shop', 'App\Http\Controllers\ShopController@store')->middleware('auth');
+
+Route::get('/voivodeship/{voivodship}/city/{city}/shop-id/{shop}/edit', 'App\Http\Controllers\ShopController@edit')->name('shop.edit');
+Route::put('/voivodeship/{voivodship}/city/{city}/shop-id/{shop}/edit', 'App\Http\Controllers\ShopController@update');

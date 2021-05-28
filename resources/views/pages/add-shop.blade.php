@@ -1,13 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Page Title</title>
-    </head>
-<body>
-    <h1>Dodaj lumpa</h1>
+@extends('layouts.app')
+
+@section('content')
+<div class="d-flex justify-content-center">
     <form action="{{ route('shop.create') }}" method="POST" enctype="multipart/form-data">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <h1>Dodaj lumpa</h1>
         @csrf
-        <label>Nazwa:</label><br>
+        <label>Nazwa lumpeksu:</label><br>
         <input type="text" name="name" value="{{ old('name') }}"><br>
         <label>Województwo:</label><br>
         <select name="voivodship" value="{{ old('voivodship') }}">
@@ -71,10 +78,10 @@
         <label>Niedziela:</label><br>
         <input type="text" name="open_hrs_sn" value="{{ old('open_hrs_sn') }}"><br>
         <label>Zdjęcia:</label><br>
-        <input type="file" name="image[]" multiple><br>
+        <input type="file" name="images[]" multiple><br>
         <label>Opis:</label><br>
         <textarea name="information" id="" cols="30" rows="10">{{ old('information') }}</textarea><br>
         <input type="submit" value="Submit">
       </form>
-</body>
-</html>
+</div>
+@endsection

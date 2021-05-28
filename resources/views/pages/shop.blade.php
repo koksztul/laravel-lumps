@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Page Title</title>
-    </head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+    @can('manage-shop', $shop)
+    <a href="{{ route('shop.edit', [$shop->city->voivodship->name, $shop->city->name, $shop->id]) }}">Edytuj</a>
+    @endcan
     <h1>Nazwa lumpeksa: {{ $shop->name }} </h1>
     <ol>
         <li>Adres: {{ $shop->address }}</li>
@@ -25,15 +25,13 @@
                 <li>Niedziela: {{ $shop->open_hrs_sn }}</li>
             </ul>
     </ol>
-    {{ dd($shop->photos) }}
-    @if ($shop->photos)
+    @if ($shop->images->count() > 0)
     <p>Zdjęcia: </p>
-        @foreach ($shop->photos as $image) 
-            <img src="{{ $image->url }}" alt="">
+        @foreach ($shop->images as $image) 
+            <img src="{{ $image->getFormattedUrlAttribute() }}" alt="" width="420" height="360">
         @endforeach
     @else
     <p>Brak zdjęć: </p>
     @endif
     <p>Opis: {{ $shop->information }}</p>
-</body>
-</html>
+@endsection

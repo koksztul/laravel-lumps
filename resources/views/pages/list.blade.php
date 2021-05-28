@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Page Title</title>
-    </head>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <ol>
         @foreach ($voivodships as $voivodship)  
         <li><a href="{{ route('voivodship.index', $voivodship->name) }}">{{$voivodship->name}}</a></li>
@@ -24,5 +21,4 @@
         </ol>
         @endforeach
     </ol>
-</body>
-</html>
+@endsection
