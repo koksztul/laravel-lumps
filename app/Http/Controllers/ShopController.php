@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreShopRequest;
+use App\Http\Requests\UpdateShopRequest;
 use App\Models\Shop;
 use App\Models\City;
 use Illuminate\Http\Request;
@@ -97,7 +98,7 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $voivodship, $city, Shop $shop)
+    public function update(UpdateShopRequest $request, $voivodship, $city, Shop $shop)
     {
         $voivodship = Voivodship::whereName($request->input('voivodship'))->firstOrFail();
 

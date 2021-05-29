@@ -6,6 +6,7 @@
         <li><a href="{{ route('voivodship.index', $voivodship->name) }}">{{$voivodship->name}}</a></li>
         @endforeach
     </ol>
+<!--
     <ol>
         @foreach ($voivodships as $voivodship)
         <li>{{ $voivodship->name }}</li>
@@ -21,4 +22,5 @@
         </ol>
         @endforeach
     </ol>
+-->
 @endsection

@@ -16,7 +16,7 @@ class VoivodshipController extends Controller
      */
     public function index($name)
     {
-        $cities = City::whereHas('voivodship', function ($query) use ($name) {
+        $cities = City::has('shops')->whereHas('voivodship', function ($query) use ($name) {
             $query->where('name', '=', $name);
         })->get();
 

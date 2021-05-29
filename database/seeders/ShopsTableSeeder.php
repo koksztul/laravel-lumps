@@ -13,6 +13,6 @@ class ShopsTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Shop::factory(90)->create();
+        \App\Models\Shop::factory(4000)->create();
     }
 }

@@ -17,7 +17,6 @@ class CreateCitiesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('voivodship_id');
             $table->string('name');
-            $table->timestamps();
 
             $table->foreign('voivodship_id')
                 ->references('id')

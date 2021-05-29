@@ -25,7 +25,7 @@ class ShopFactory extends Factory
             'name' => $this->faker->company(),
             'ratio' => $this->faker->numberBetween(1, 5),
             'user_id' => $this->faker->numberBetween(1, 20),
-            'city_id' => $this->faker->numberBetween(1, 50),
+            'city_id' => $this->faker->numberBetween(1, 1580),
             'address' => $this->faker->streetAddress(),
             'website' => $this->faker->url(),
             'information' => $this->faker->paragraph(20),

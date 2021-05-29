@@ -16,7 +16,6 @@ class CreateVoivodshipsTable extends Migration
         Schema::create('voivodships', function (Blueprint $table) {
             $table->id();
             $table->enum('name', ['dolnoslaskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'lodzkie', 'malopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'pomorskie', 'slaskie', 'swietokrzyskie', 'warminsko-mazurskie', 'zachodniopomorskie', 'wielkoplskie', 'podlaskie'])->unique();
-            $table->timestamps();
         });
     }
 

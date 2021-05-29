@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class VoivodshipsTableSeeder extends Seeder
 {
@@ -13,6 +14,11 @@ class VoivodshipsTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Voivodship::factory(16)->create();
+        $array = array ('dolnoslaskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'lodzkie', 'malopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'slaskie', 'swietokrzyskie', 'warminsko-mazurskie', 'wielkoplskie', 'zachodniopomorskie');
+        for ($i = 0; $i < 16; $i++) {
+            DB::table('voivodships')->insert(array(
+                'name' => $array[$i],
+            ));
+        }
     }
 }
