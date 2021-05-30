@@ -35,7 +35,7 @@
             <option value="mazowieckie">mazowieckie</option>
         </select><br>
         <label>Miasto:</label><br>
-        <input type="text" name="city" value="{{ old('city') }}"><br>
+        <input type="text" id="city_search" name="city" value="{{ old('city') }}"><br>
         <label>Adres:</label><br>
         <input type="text" name="address" value="{{ old('address') }}"><br>
         <label>kontakt:</label><br>
@@ -84,4 +84,33 @@
         <input type="submit" value="Submit">
       </form>
 </div>
+@endsection
+
+@section('js')
+// CSRF Token
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+$(document).ready(function(){
+  $( "#city_search" ).autocomplete({
+    source: function( request, response ) {
+      // Fetch data
+      $.ajax({
+        url:"{{route('cities.getCites')}}",
+        type: 'post',
+        dataType: "json",
+        data: {
+           _token: CSRF_TOKEN,
+           search: request.term
+        },
+        success: function( data ) {
+           response( data );
+        }
+      });
+    },
+    select: function (event, ui) {
+       // Set selection
+       $('#city_search').val(ui.item.label); // display the selected text
+       return false;
+    }
+  });
+});
 @endsection

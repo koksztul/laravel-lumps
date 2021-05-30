@@ -14,7 +14,7 @@ class VoivodshipsTableSeeder extends Seeder
      */
     public function run()
     {
-        $array = array ('dolnoslaskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'lodzkie', 'malopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'slaskie', 'swietokrzyskie', 'warminsko-mazurskie', 'wielkoplskie', 'zachodniopomorskie');
+        $array = array ('dolnoslaskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'lodzkie', 'malopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'slaskie', 'swietokrzyskie', 'warminsko-mazurskie', 'wielkopolskie', 'zachodniopomorskie');
         for ($i = 0; $i < 16; $i++) {
             DB::table('voivodships')->insert(array(
                 'name' => $array[$i],

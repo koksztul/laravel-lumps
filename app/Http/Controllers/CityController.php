@@ -94,4 +94,26 @@ class CityController extends Controller
     {
         //
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function autocomplete(Request $request)
+    {
+        $search = $request->search;
+
+        if ($search == '') {
+            $Cities = City::orderby('name', 'asc')->select('id', 'name')->limit(5)->get();
+        } else {
+            $Cities = City::orderby('name', 'asc')->select('id', 'name')->where('name', 'like', $search . '%')->limit(5)->get();
+        }
+
+        $response = array();
+        foreach ($Cities as $city) {
+            $response[] = array("label" => $city->name);
+        }
+        return response()->json($response);
+    }
 }

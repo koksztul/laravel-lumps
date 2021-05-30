@@ -41,12 +41,10 @@ class ShopController extends Controller
      */
     public function store(StoreShopRequest $request)
     {
-        $voivodship = Voivodship::firstOrCreate(['name' => $request->input('voivodship')]);
+        $voivodship = Voivodship::whereName($request->input('voivodship'))->firstOrFail();
 
-        $city = City::firstOrCreate([
-            'name' => $request->input('city'),
-            'voivodship_id' => $voivodship->id
-            ]);
+        $city = City::whereName($request->input('city'))->firstOrFail();
+
         $data = $request->except(['images', 'city', 'voivodship']);
         $data['city_id'] = $city->id;
 

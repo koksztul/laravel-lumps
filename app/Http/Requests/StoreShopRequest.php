@@ -31,7 +31,8 @@ class StoreShopRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'city' => 'required',
+            'city' => 'required|exists:cities,name',
+            'voivodship' => 'required|exists:voivodships,name',
             'address' => 'required',
             'images' => 'max:5',
             'images.*' => 'max:2048|image',
