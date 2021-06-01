@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Shop;
+use App\Models\Voivodship;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -100,14 +101,24 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function autocomplete(Request $request)
+    public function getCities(Request $request)
     {
         $search = $request->search;
+        $voivodship = Voivodship::whereName($request->voivodshipName)->firstOrFail();
 
         if ($search == '') {
-            $Cities = City::orderby('name', 'asc')->select('id', 'name')->limit(5)->get();
+            $Cities = City::where('voivodship_id', $voivodship->id)
+                ->orderby('name', 'asc')
+                ->select('name')
+                ->limit(5)
+                ->get();
         } else {
-            $Cities = City::orderby('name', 'asc')->select('id', 'name')->where('name', 'like', $search . '%')->limit(5)->get();
+            $Cities = City::where('voivodship_id', $voivodship->id)
+                ->orderby('name', 'asc')
+                ->select('name')
+                ->where('name', 'like', $search . '%')
+                ->limit(5)
+                ->get();
         }
 
         $response = array();

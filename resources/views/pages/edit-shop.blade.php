@@ -18,7 +18,7 @@
         <label>Nazwa lumpeksu:</label><br>
         <input type="text" name="name" value="{{ $shop->name }}"><br>
         <label>Województwo:</label><br>
-        <select name="voivodship" value="{{ $shop->city->voivodship->name }}">
+        <select name="voivodship" id="voivodship" value="{{ $shop->city->voivodship->name }}">
             <option value="podlaskie" {{ ($shop->city->voivodship->name) === 'podlaskie' ? ' selected' : '' }}>podlaskie</option>
             <option value="podkarpackie" {{ ($shop->city->voivodship->name) === 'podkarpackie' ? ' selected' : '' }}>podkarpackie</option>
             <option value="kujawsko-pomorskie" {{ ($shop->city->voivodship->name) === 'kujawsko-pomorskie' ? ' selected' : '' }}>kujawsko-pomorskie</option>
@@ -36,7 +36,7 @@
             <option value="mazowieckie" {{ ($shop->city->voivodship->name) === 'mazowieckie' ? ' selected' : '' }}>mazowieckie</option>
         </select><br>
         <label>Miasto:</label><br>
-        <input type="text" name="city" value="{{ $shop->city->name }}"><br>
+        <input type="text" id ="city_search" name="city" value="{{ $shop->city->name }}"><br>
         <label>Adres:</label><br>
         <input type="text" name="address" value="{{ $shop->address }}"><br>
         <label>kontakt:</label><br>
@@ -93,4 +93,33 @@
         <input type="submit" value="Submit">
       </form>
 </div>
+@endsection
+
+@section('js')
+// CSRF Token
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+$(document).ready(function(){
+  $( "#city_search" ).autocomplete({
+    source: function( request, response ) {
+      $.ajax({
+        url:"{{route('cities.getCites')}}",
+        type: 'post',
+        dataType: "json",
+        data: {
+           _token: CSRF_TOKEN,
+           search: request.term,
+           voivodshipName: $( "#voivodship option:selected" ).val()
+        },
+        success: function( data ) {
+           response( data );
+        }
+      });
+    },
+    select: function (event, ui) {
+       // Set selection
+       $('#city_search').val(ui.item.label); // display the selected text
+       return false;
+    }
+  });
+});
 @endsection

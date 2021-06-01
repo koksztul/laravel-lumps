@@ -45,7 +45,7 @@ class ShopController extends Controller
 
         $city = City::whereName($request->input('city'))->firstOrFail();
 
-        $data = $request->except(['images', 'city', 'voivodship']);
+        $data = $request->except(['images', 'city', 'voivodship', 'voivodship_id']);
         $data['city_id'] = $city->id;
 
         $shop = Shop::create($data);

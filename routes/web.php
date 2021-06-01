@@ -29,4 +29,4 @@ Route::post('/add-shop', 'App\Http\Controllers\ShopController@store')->middlewar
 Route::get('/voivodeship/{voivodship}/city/{city}/shop-id/{shop}/edit', 'App\Http\Controllers\ShopController@edit')->name('shop.edit');
 Route::put('/voivodeship/{voivodship}/city/{city}/shop-id/{shop}/edit', 'App\Http\Controllers\ShopController@update');
 
-Route::post('getCities', 'App\Http\Controllers\CityController@autocomplete')->name('cities.getCites');
+Route::post('getCities', 'App\Http\Controllers\CityController@getCities')->name('cities.getCites');
