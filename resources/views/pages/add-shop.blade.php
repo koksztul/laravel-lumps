@@ -17,7 +17,7 @@
         <label>Nazwa lumpeksu:</label><br>
         <input type="text" name="name" value="{{ old('name') }}"><br>
         <label>Województwo:</label><br>
-        <select name="voivodship" value="{{ old('voivodship') }}">
+        <select id="voivodship" name="voivodship" value="{{ old('voivodship') }}">
             <option value="podlaskie">podlaskie</option>
             <option value="podkarpackie">podkarpackie</option>
             <option value="kujawsko-pomorskie">kujawsko-pomorskie</option>
@@ -87,19 +87,18 @@
 @endsection
 
 @section('js')
-// CSRF Token
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function(){
   $( "#city_search" ).autocomplete({
     source: function( request, response ) {
-      // Fetch data
       $.ajax({
         url:"{{route('cities.getCites')}}",
         type: 'post',
         dataType: "json",
         data: {
            _token: CSRF_TOKEN,
-           search: request.term
+           search: request.term,
+           voivodshipName: $( "#voivodship option:selected" ).val()
         },
         success: function( data ) {
            response( data );

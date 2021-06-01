@@ -96,7 +96,6 @@
 @endsection
 
 @section('js')
-// CSRF Token
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function(){
   $( "#city_search" ).autocomplete({
