@@ -7,7 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'city_id',
+        'name',
+        'address',
+        'website',
+        'information',
+        'contact',
+        'open_hrs_mo',
+        'open_hrs_tu',
+        'open_hrs_we',
+        'open_hrs_th',
+        'open_hrs_fr',
+        'open_hrs_sa',
+        'open_hrs_sn',
+        'type_of_purchase',
+        'day_of_delivery',
+        'cash',
+        'card',
+    ];
 
     protected $casts = [
         'cash' => 'boolean',

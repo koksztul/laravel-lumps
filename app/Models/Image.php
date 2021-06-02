@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'url',
+        'imageable_id',
+        'imageable_type'
+    ];
     use HasFactory;
 
     public function imageable()
