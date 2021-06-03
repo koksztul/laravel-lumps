@@ -30,6 +30,9 @@ $(function () {
             var usersRated = data['usersRated'];
             $('#avgrating_' + shop_id).text(average);
             $('#usersRated_' + shop_id).text(usersRated);
+          },
+          error: function error(data) {
+            Swal.fire('Błąd!', 'Zaloguj się, aby oddać głos!', 'error');
           }
         });
       }

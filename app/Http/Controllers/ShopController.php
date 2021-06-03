@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Voivodship;
 use App\Models\Image;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -85,6 +86,7 @@ class ShopController extends Controller
      */
     public function edit($voivodship, $city, Shop $shop)
     {
+        $this->authorize('manage-shop', $shop);
         return view('pages.edit-shop', compact('shop'));
     }
 
@@ -97,6 +99,7 @@ class ShopController extends Controller
      */
     public function update(UpdateShopRequest $request, $voivodship, $city, Shop $shop)
     {
+        $this->authorize('manage-shop', $shop);
         $voivodship = Voivodship::whereName($request->input('voivodship'))->firstOrFail();
 
         $city = City::whereName($request->input('city'))->firstOrFail();
@@ -130,19 +133,26 @@ class ShopController extends Controller
 
     public function rating(Request $request, $id)
     {
-        try {
-            $shop = Shop::findOrFail($id);
-            $shop->rateOnce($request->rating);
+        if (Auth::user()) {
+            try {
+                $shop = Shop::findOrFail($id);
+                $shop->rateOnce($request->rating);
+                return response()->json([
+                    'status' => 'success',
+                    'averageRating' => $shop->averageRating,
+                    'usersRated' => $shop->usersRated(),
+                ]);
+            } catch (Exception $e) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'error'
+                ])->setStatusCode(500);
+            }
+        } else {
             return response()->json([
-                'status' => 'success',
-                'averageRating' => $shop->averageRating,
-                'usersRated' => $shop->usersRated(),
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'error'
-            ])->setStatusCode(500);
+                'status' => 'error',
+                'message' => 'unautchorized'
+            ])->setStatusCode(419);
         }
     }
 }

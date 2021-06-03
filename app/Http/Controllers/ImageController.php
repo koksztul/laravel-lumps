@@ -82,6 +82,7 @@ class ImageController extends Controller
      */
     public function destroy(Image $image): JsonResponse
     {
+        $this->authorize('manage-shop', $image->shop);
         try {
             $image->delete();
             return response()->json([
