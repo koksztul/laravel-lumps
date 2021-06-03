@@ -37,8 +37,8 @@ class ShopFactory extends Factory
             'open_hrs_fr' => $this->faker->time($format = 'H:i', $max = 'now') . ' - ' . $this->faker->time($format = 'H:i', $max = 'now'),
             'open_hrs_sa' => $this->faker->time($format = 'H:i', $max = 'now') . ' - ' . $this->faker->time($format = 'H:i', $max = 'now'),
             'open_hrs_sn' => $this->faker->time($format = 'H:i', $max = 'now') . ' - ' . $this->faker->time($format = 'H:i', $max = 'now'),
-            'type_of_purchase' => $this->faker->randomElement($array = array ('kg', 'valuation', 'both')),
-            'day_of_delivery' => $this->faker->dayOfWeek(),
+            'type_of_purchase' => $this->faker->randomElement($array = array ('kg', 'wycena', 'both')),
+            'day_of_delivery' => $this->faker->randomElement($array = array ('poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela')),
             'cash' => $this->faker->numberBetween(0, 1),
             'card' => $this->faker->numberBetween(0, 1),
         ];

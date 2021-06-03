@@ -30,8 +30,8 @@ class CreateShopsTable extends Migration
             $table->string('open_hrs_fr')->nullable();
             $table->string('open_hrs_sa')->nullable();
             $table->string('open_hrs_sn')->nullable();
-            $table->enum('type_of_purchase', ['kg', 'valuation', 'both']);
-            $table->enum('day_of_delivery', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
+            $table->enum('type_of_purchase', ['kg', 'wycena', 'both']);
+            $table->enum('day_of_delivery', ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela']);
             $table->boolean('cash')->default(0);
             $table->boolean('card')->default(0);
             $table->timestamps();

@@ -45,18 +45,18 @@
         <label>rodaj zakupów:</label><br>
         <select name="type_of_purchase" value="{{ old('type_of_purchase') }}">
             <option value="kg">kg</option>
-            <option value="valuation">wycena</option>
+            <option value="wycena">wycena</option>
             <option value="both">oba</option>
         </select><br>
         <label>dzień dostawy:</label><br>
         <select name="day_of_delivery" value="{{ old('day_of_delivery') }}">
-            <option value="monday">Poniedziałek</option>
-            <option value="tuesday">Wtorek</option>
-            <option value="wednesday">Środa</option>
-            <option value="thursday">Czwartek</option>
-            <option value="friday">Piątek</option>
-            <option value="saturday">Sobota</option>
-            <option value="sunday">Niedziela</option>
+            <option value="poniedziałek">Poniedziałek</option>
+            <option value="wtorek">Wtorek</option>
+            <option value="środa">Środa</option>
+            <option value="czwartek">Czwartek</option>
+            <option value="piątek">Piątek</option>
+            <option value="sobota">Sobota</option>
+            <option value="niedziela">Niedziela</option>
         </select><br>
         <label>płatność gotówka:</label><br>
         <input type="checkbox" name="cash" value="1" {{ old('cash') ? 'checked="checked"' : '' }}><br>

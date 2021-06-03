@@ -46,18 +46,18 @@
         <label>rodaj zakupów:</label><br>
         <select name="type_of_purchase" value="{{ $shop->type_of_purchase }}">
             <option value="kg" {{ ($shop->type_of_purchase) === 'kg' ? ' selected' : '' }}>kg</option>
-            <option value="valuation" {{ ($shop->type_of_purchase) === 'valuation' ? ' selected' : '' }}>wycena</option>
+            <option value="wycena" {{ ($shop->type_of_purchase) === 'wycena' ? ' selected' : '' }}>wycena</option>
             <option value="both" {{ $shop->type_of_purchase === 'both' ? ' selected' : '' }}>oba</option>
         </select><br>
         <label>dzień dostawy:</label><br>
         <select name="day_of_delivery" value="{{ $shop->day_of_delivery }}">
-            <option value="monday"  {{ $shop->day_of_delivery === 'monday' ? ' selected' : '' }}>Poniedziałek</option>
-            <option value="tuesday"  {{ $shop->day_of_delivery === 'tuesday' ? ' selected' : '' }}>Wtorek</option>
-            <option value="wednesday"  {{ $shop->day_of_delivery === 'wednesday' ? ' selected' : '' }}>Środa</option>
-            <option value="thursday"  {{ $shop->day_of_delivery === 'thursday' ? ' selected' : '' }}>Czwartek</option>
-            <option value="friday"  {{ $shop->day_of_delivery === 'friday' ? ' selected' : '' }}>Piątek</option>
-            <option value="saturday"  {{ $shop->day_of_delivery === 'saturday' ? ' selected' : '' }}>Sobota</option>
-            <option value="sunday"  {{ $shop->day_of_delivery === 'sunday' ? ' selected' : '' }}>Niedziela</option>
+            <option value="poniedziałek"  {{ $shop->day_of_delivery === 'poniedziałek' ? ' selected' : '' }}>Poniedziałek</option>
+            <option value="wtorek"  {{ $shop->day_of_delivery === 'wtorek' ? ' selected' : '' }}>Wtorek</option>
+            <option value="środa"  {{ $shop->day_of_delivery === 'środa' ? ' selected' : '' }}>Środa</option>
+            <option value="czwartek"  {{ $shop->day_of_delivery === 'czwartek' ? ' selected' : '' }}>Czwartek</option>
+            <option value="piątek"  {{ $shop->day_of_delivery === 'piątek' ? ' selected' : '' }}>Piątek</option>
+            <option value="sobota"  {{ $shop->day_of_delivery === 'sobota' ? ' selected' : '' }}>Sobota</option>
+            <option value="niedziela"  {{ $shop->day_of_delivery === 'niedziela' ? ' selected' : '' }}>Niedziela</option>
         </select><br>
         <label>płatność gotówka:</label><br>
         <input type="checkbox" name="cash" value="1" {{ $shop->cash ? 'checked="checked"' : '' }}><br>
