@@ -44,6 +44,17 @@
     <p>Brak zdjęć: </p>
     @endif
     <p>Opis: {{ $shop->information ? $shop->information : 'brak'}}</p>
+
+    @if ($shop->comments->count() > 0)
+    <p>Komentarze: </p>
+    <ol>
+        @foreach ($shop->comments as $comment) 
+        <li>{{ $comment->user->name }}: {{ $comment->body }}</li>
+        @endforeach
+    </ol>
+    @else
+    <p>Brak komentarzy: </p>
+    @endif
 @endsection
 
 @section('js-files')

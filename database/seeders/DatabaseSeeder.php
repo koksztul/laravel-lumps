@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ShopsTableSeeder::class,
             PostsTableSeeder::class,
             ImagesTableSeeder::class,
+            CommentsTableSeeder::class,
         ]);
     }
 }
