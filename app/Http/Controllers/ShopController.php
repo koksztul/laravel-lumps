@@ -53,10 +53,8 @@ class ShopController extends Controller
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('photos');
-                Image::create([
+                $shop->images()->create([
                     'url' => $path,
-                    'imageable_id' => $shop->id,
-                    'imageable_type' => 'App\Models\Shop'
                     ]);
             }
         }
@@ -110,10 +108,8 @@ class ShopController extends Controller
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('photos');
-                Image::create([
+                $shop->images()->create([
                     'url' => $path,
-                    'imageable_id' => $data->id,
-                    'imageable_type' => 'App\Models\Shop'
                     ]);
             }
         }
