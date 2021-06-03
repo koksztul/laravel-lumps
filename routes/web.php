@@ -32,3 +32,5 @@ Route::put('/voivodeship/{voivodship}/city/{city}/shop-id/{shop}/edit', 'App\Htt
 Route::post('getCities', 'App\Http\Controllers\CityController@getCities')->name('cities.getCites');
 
 Route::delete('shop/image/{image}', 'App\Http\Controllers\ImageController@destroy')->name('image.delete');
+
+Route::post('shop/rate/{id}', 'App\Http\Controllers\ShopController@rating')->name('shop.rating');

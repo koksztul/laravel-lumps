@@ -9,6 +9,7 @@ use App\Models\City;
 use Illuminate\Http\Request;
 use App\Models\Voivodship;
 use App\Models\Image;
+use Exception;
 
 class ShopController extends Controller
 {
@@ -125,5 +126,23 @@ class ShopController extends Controller
     public function destroy(Shop $shop)
     {
         //
+    }
+
+    public function rating(Request $request, $id)
+    {
+        try {
+            $shop = Shop::findOrFail($id);
+            $shop->rateOnce($request->rating);
+            return response()->json([
+                'status' => 'success',
+                'averageRating' => $shop->averageRating,
+                'usersRated' => $shop->usersRated(),
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'error'
+            ])->setStatusCode(500);
+        }
     }
 }

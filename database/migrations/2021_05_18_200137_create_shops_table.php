@@ -18,7 +18,6 @@ class CreateShopsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('city_id');
             $table->string('name');
-            $table->integer('ratio')->default(0);
             $table->string('address')->nullable();
             $table->string('website')->nullable();
             $table->text('information')->nullable();

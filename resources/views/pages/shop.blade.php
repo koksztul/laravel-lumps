@@ -9,7 +9,17 @@
         <li>Adres: {{ $shop->address }}</li>
         <li>kontakt: {{ $shop->contact ? $shop->contact : 'brak' }}</li>
         <li>strona: {!! $shop->website ? '<a href="'. $shop->website .'"> '. $shop->website .'</a>' : 'brak' !!}</li>
-        <li>ocena: {{ $shop->ratio ? $shop->ratio : 'brak ocen'}}</li>
+        <li>ocena: </li>
+        <!-- Rating -->
+        Average Rating : <span id='avgrating_{{ $shop->id }}'>{{ $shop->averageRating }}</span>
+        <select class='rating' id='rating_{{ $shop->id }}' data-id='rating_{{ $shop->id }}' data-url='{{ route('shop.rating', $shop->id)}}'>
+            <option value="1" >1</option>
+            <option value="2" >2</option>
+            <option value="3" >3</option>
+            <option value="4" >4</option>
+            <option value="5" >5</option>
+        </select> 
+        Users rated: <span id='usersRated_{{ $shop->id }}'>{{ $shop->usersRated() }}</span>
         <li>rodaj zakupów: {{ $shop->type_of_purchase === 'both' ? 'wycena i kg' : $shop->type_of_purchase}}</li>
         <li>dzień dostawy: {{ $shop->day_of_delivery }}</li>
         <li>płatnośc gotówka: {{ $shop->cash ? 'dostępna' : 'brak' }}</li>
@@ -34,4 +44,8 @@
     <p>Brak zdjęć: </p>
     @endif
     <p>Opis: {{ $shop->information ? $shop->information : 'brak'}}</p>
+@endsection
+
+@section('js-files')
+    <script src="{{ mix('/js/vote-rate.js') }}"></script>
 @endsection

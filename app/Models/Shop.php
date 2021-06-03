@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use willvincent\Rateable\Rateable;
 
 class Shop extends Model
 {
+    use Rateable;
+
     protected $fillable = [
         'user_id',
         'city_id',
