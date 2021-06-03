@@ -81,7 +81,10 @@
         @if ($shop->images->count() > 0)
         <p>Zdjęcia: </p>
             @foreach ($shop->images as $image) 
-                <img src="{{ $image->getFormattedUrlAttribute() }}" alt="" width="420" height="360">
+            <div class="image-content">
+                <img src="{{ $image->getFormattedUrlAttribute() }}" alt="" width="420" height="360"><br>
+                <button type="button" class="btn btn-danger btn-sm delete" data-url="{{ route('image.delete', $image->id) }}">Remove</button><br>
+            </div>
             @endforeach
         @else
         <p>Brak zdjęć: </p>
@@ -90,7 +93,7 @@
         <input type="file" name="images[]" multiple><br>
         <label>Opis:</label><br>
         <textarea name="information" id="" cols="30" rows="10">{{ $shop->information }}</textarea><br>
-        <input type="submit" value="Submit">
+        <input type="submit" name="submitbutton" value="submit">
       </form>
 </div>
 @endsection
@@ -121,4 +124,8 @@ $(document).ready(function(){
     }
   });
 });
+@endsection
+
+@section('js-files')
+    <script src="{{ mix('/js/delete-image.js') }}"></script>
 @endsection

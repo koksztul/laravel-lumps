@@ -13,5 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/cityautocomplete.js', 'public/js')
+    .js('resources/js/delete-image.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');
