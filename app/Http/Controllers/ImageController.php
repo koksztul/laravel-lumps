@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Image;
+use App\Models\Shop;
 use Exception;
 
 class ImageController extends Controller
@@ -82,12 +83,12 @@ class ImageController extends Controller
      */
     public function destroy(Image $image): JsonResponse
     {
-        $this->authorize('manage-shop', $image->shop);
+        $shop = Shop::findOrFail($image->imageable_id);
+        $this->authorize('manage-shop', $shop);
         try {
-            $image->delete();
             return response()->json([
                 'status' => 'success'
-            ]);
+            ])->setStatusCode(200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'success',

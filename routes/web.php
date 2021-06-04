@@ -34,3 +34,7 @@ Route::post('getCities', 'App\Http\Controllers\CityController@getCities')->name(
 Route::delete('shop/image/{image}', 'App\Http\Controllers\ImageController@destroy')->name('image.delete');
 
 Route::post('shop/rate/{id}', 'App\Http\Controllers\ShopController@rating')->name('shop.rating');
+
+Route::post('/comment/store/{shop}', 'App\Http\Controllers\CommentController@store')->name('comment.store');
+
+Route::get('/user/my-shops', 'App\Http\Controllers\User\ShopController@index')->name('user.shops.index');

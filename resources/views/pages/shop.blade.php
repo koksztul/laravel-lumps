@@ -55,6 +55,17 @@
     @else
     <p>Brak komentarzy: </p>
     @endif
+
+    @auth
+        <form method="POST" action="{{ route('comment.store', $shop->id) }}">
+            @csrf
+            <label for="comment">Write Comment:</label>
+            <textarea class="form-control {{ $errors->has('text') ? ' is-invalid' : '' }}" rows="2" id="comment" name="body"></textarea>
+            <button type="submit" class="btn btn-secondary">Comment</button>
+        </form>
+    @else
+        <a rel="" href="{{ route('login') }}" target="_parent" class="">Zaloguj się, aby dodać komentarz</a>
+    @endif
 @endsection
 
 @section('js-files')
