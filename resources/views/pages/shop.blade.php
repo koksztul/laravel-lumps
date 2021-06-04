@@ -50,7 +50,7 @@
     <ol id="list">
         @foreach ($shop->comments as $comment) 
         <li><span>{{ $comment->user->name }}</span> <p class="commentbody">{{ $comment->body }}</p>
-            @if ($comment->user_id === auth()->user()->id)
+            @can('manage-comment', $comment)
             <button class="btn btn-danger deletecomment" data-url="{{ route('comment.delete', $comment->id) }}">usuń</button>
             <button class="btn btn-primary editcomment" data-url="{{ route('comment.edit', $comment->id) }}">edytuj</button>
             @endif
