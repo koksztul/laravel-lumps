@@ -83,8 +83,7 @@ class ImageController extends Controller
      */
     public function destroy(Image $image): JsonResponse
     {
-        $shop = Shop::findOrFail($image->imageable_id);
-        $this->authorize('manage-shop', $shop);
+        $this->authorize('manage-shop', $image->imageable);
         try {
             return response()->json([
                 'status' => 'success'

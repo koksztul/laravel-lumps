@@ -47,11 +47,11 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('shop.create') }}">Dodaj lumpa</a>
+                            <a class="nav-link" href="{{ route('shop.create') }}">Dodaj sklep</a>
                         </li>   
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Dodaj lumpa</a>
+                            <a class="nav-link" href="{{ route('login') }}">Dodaj sklep</a>
                         </li>    
                         @endauth
                     </ul>
