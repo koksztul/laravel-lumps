@@ -47,9 +47,14 @@
 
     @if ($shop->comments->count() > 0)
     <p>Komentarze: </p>
-    <ol>
+    <ol id="list">
         @foreach ($shop->comments as $comment) 
-        <li>{{ $comment->user->name }}: {{ $comment->body }}</li>
+        <li><span>{{ $comment->user->name }}</span> <p class="commentbody">{{ $comment->body }}</p>
+            @if ($comment->user_id === auth()->user()->id)
+            <button class="btn btn-danger deletecomment" data-url="{{ route('comment.delete', $comment->id) }}">usuń</button>
+            <button class="btn btn-primary editcomment" data-url="{{ route('comment.edit', $comment->id) }}">edytuj</button>
+            @endif
+        </li>
         @endforeach
     </ol>
     @else
@@ -59,9 +64,9 @@
     @auth
         <form method="POST" action="{{ route('comment.store', $shop->id) }}">
             @csrf
-            <label for="comment">Write Comment:</label>
-            <textarea class="form-control {{ $errors->has('text') ? ' is-invalid' : '' }}" rows="2" id="comment" name="body"></textarea>
-            <button type="submit" class="btn btn-secondary">Comment</button>
+            <label for="comment">Napisz komentarz:</label>
+            <textarea class="form-control {{ $errors->has('text') ? ' is-invalid' : '' }}" rows="2" id="commentbody" name="body"></textarea>
+            <button type="button" data-url="{{ route('comment.store', $shop->id) }}" class="btn btn-secondary storecomment">Comment</button>
         </form>
     @else
         <a rel="" href="{{ route('login') }}" target="_parent" class="">Zaloguj się, aby dodać komentarz</a>
@@ -70,4 +75,88 @@
 
 @section('js-files')
     <script src="{{ mix('/js/vote-rate.js') }}"></script>
+@endsection
+
+@section('js')
+$(document).ready(function(){
+    $(document).on('click', '.storecomment', function() {
+      $.ajax({
+        url: $(".storecomment").data('url'),
+        type: 'post',
+        dataType: "json",
+        data: {
+           _token: $('meta[name="csrf-token"]').attr('content'),
+           body: $('#commentbody').val()
+        },
+        success: function( data ) {
+        var urlDelete = "{{ route('comment.delete', '') }}"+"/"+data.id;
+        var urlEdit = "{{ route('comment.edit', '') }}"+"/"+data.id;
+           var html = '<li><span>' + data.user + '</span><p class="commentbody">'+ data.body + '</p><button class="btn btn-danger deletecomment" data-url="'+urlDelete+'">usuń</button><button class="btn btn-primary editcomment" data-url="'+urlEdit+'">edytuj</button></li>';
+           $("#list").append(html);
+        },
+        error: function(data){
+            Swal.fire(
+                'Błąd!',
+                data.responseText,
+                'error'
+                )
+        }
+      });
+    });
+    $('#list').on('click', '.deletecomment', function() {
+        var $this = $(this);
+        $.ajax({
+        url: $this.data('url'),
+        type: 'delete',
+        dataType: "json",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+        },
+        success: function( data ) {
+            $this.closest("li").remove();
+        },
+        error: function(data){
+            Swal.fire(
+                'Błąd!',
+                data.responseText,
+                'error'
+                )
+        }
+        });
+    });
+    $('#list').on('click', '.editcomment', function() {
+        var $this = $(this);
+        var body = $this.closest('li').find('.commentbody').text();
+        $this.closest('li').find('.commentbody').replaceWith('<textarea class="form-control" rows="2" id="commentbody" name="body">'+ body +'</textarea>');
+        $this.text('zapisz');
+        $this.addClass('updatecomment');
+        $this.removeClass('editcomment');
+    });
+    $('#list').on('click', '.updatecomment', function() {
+        var $this = $(this);
+        var body = $this.closest('li').find('textarea').val();
+        $.ajax({
+            url: $this.data('url'),
+            type: 'put',
+            dataType: "json",
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                body: body,
+            },
+            success: function( data ) {
+                $this.closest('li').find('textarea').replaceWith('<p class="commentbody">' + data.body + '</p>');
+                $this.text('edytuj');
+                $this.addClass('editcomment');
+                $this.removeClass('updatecomment');
+            },
+            error: function(data){
+                Swal.fire(
+                    'Błąd!',
+                    data.responseText,
+                    'error'
+                    )
+        }
+        });
+    });
+});
 @endsection

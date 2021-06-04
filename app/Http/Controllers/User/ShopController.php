@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shop;
+use App\Http\Requests\StoreCommentRequest;
 
 class ShopController extends Controller
 {
@@ -83,5 +84,17 @@ class ShopController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function storeComment(StoreCommentRequest $request, Shop $shop)
+    {
+        $this->middleware('auth');
+        $comment = $shop->comments()->create($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'body' => $comment->body,
+            'user' => $comment->user->name,
+            'id' => $comment->id,
+        ])->setStatusCode(200);
     }
 }

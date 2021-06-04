@@ -137,6 +137,7 @@ class ShopController extends Controller
             try {
                 $shop = Shop::findOrFail($id);
                 $shop->rateOnce($request->rating);
+
                 return response()->json([
                     'status' => 'success',
                     'averageRating' => $shop->averageRating,
