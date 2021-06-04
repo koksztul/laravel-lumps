@@ -71,7 +71,6 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        $this->middleware('auth');
         $this->authorize('manage-comment', $comment);
             $comment->update($request->all());
             return response()->json([
@@ -88,7 +87,6 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        $this->middleware('auth');
         $this->authorize('manage-comment', $comment);
             $comment->delete();
             return response()->json([
