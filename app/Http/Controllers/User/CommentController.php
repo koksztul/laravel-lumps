@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Shop;
+use App\Http\Requests\StoreCommentRequest;
 
 class CommentController extends Controller
 {
@@ -35,9 +37,21 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCommentRequest $request, Shop $shop)
     {
-        //
+        if ($request->type === 'shop') {
+            $this->middleware('auth');
+            $comment = $shop->comments()->create($request->all());
+
+            return response()->json([
+                'status' => 'success',
+                'body' => $comment->body,
+                'user' => $comment->user->name,
+                'id' => $comment->id,
+            ])->setStatusCode(200);
+        } else {
+            //
+        }
     }
 
     /**

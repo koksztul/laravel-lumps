@@ -35,7 +35,7 @@ Route::delete('shop/image/{image}', 'App\Http\Controllers\ImageController@destro
 
 Route::post('shop/rate/{id}', 'App\Http\Controllers\ShopController@rating')->name('shop.rating');
 
-Route::post('/comment/store/{shop}', 'App\Http\Controllers\User\ShopController@storeComment')->name('comment.store');
+Route::post('/comment/store/{shop}', 'App\Http\Controllers\User\CommentController@store')->name('comment.store');
 Route::delete('/comment/delete/{comment}', 'App\Http\Controllers\User\CommentController@destroy')->name('comment.delete');
 Route::put('/comment/edit/{comment}', 'App\Http\Controllers\User\CommentController@update')->name('comment.edit');
 

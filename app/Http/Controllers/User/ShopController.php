@@ -85,16 +85,4 @@ class ShopController extends Controller
     {
         //
     }
-    public function storeComment(StoreCommentRequest $request, Shop $shop)
-    {
-        $this->middleware('auth');
-        $comment = $shop->comments()->create($request->all());
-
-        return response()->json([
-            'status' => 'success',
-            'body' => $comment->body,
-            'user' => $comment->user->name,
-            'id' => $comment->id,
-        ])->setStatusCode(200);
-    }
 }

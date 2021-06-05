@@ -12,7 +12,8 @@ $(document).ready(function () {
       dataType: "json",
       data: {
         _token: $('meta[name="csrf-token"]').attr('content'),
-        body: $('#commentbody').val()
+        body: $('#commentbody').val(),
+        type: 'shop'
       },
       success: function success(data) {
         var urlDelete = $this.closest('form').attr('data-urlDel') + "/" + data.id;
