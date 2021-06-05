@@ -2,6 +2,9 @@
     "/js/app.js": "/js/app.js",
     "/js/cityautocomplete.js": "/js/cityautocomplete.js",
     "/js/delete-image.js": "/js/delete-image.js",
+    "/js/edit-comment.js": "/js/edit-comment.js",
+    "/js/delete-comment.js": "/js/delete-comment.js",
+    "/js/add-comment.js": "/js/add-comment.js",
     "/js/vote-rate.js": "/js/vote-rate.js",
     "/css/app.css": "/css/app.css"
 }
